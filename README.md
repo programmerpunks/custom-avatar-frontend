@@ -20,7 +20,7 @@ Once done, then
 $ git clone https://github.com/programmerpunks/custom-avatar-frontend.git
 ```
 
-- Install all the dependencies by changing directry to root of the project and then run the cammand:
+- Install all the dependencies by changing directory to root of the project and then run the cammand:
 ```
 $ npm install
 ```
