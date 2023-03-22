@@ -3,6 +3,7 @@ import Single from './Single'
 
 const AvatarComponents = ({ all, setValue }) => {
   useEffect(() => {}, [all])
+
   return (
     <div className="p-10 overflow-scroll grid grid-cols-4">
       {all &&

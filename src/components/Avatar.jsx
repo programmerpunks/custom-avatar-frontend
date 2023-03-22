@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
-import AvatarComponents from './AvatarComponents'
-
 import axios from 'axios'
 import html2canvas from 'html2canvas'
+
+import AvatarComponents from './AvatarComponents'
+import { useEffect, useState } from 'react'
 
 const Avatar = () => {
   const [allBackground, setAllBackground] = useState('')
@@ -29,18 +29,6 @@ const Avatar = () => {
 
   const [tab, setTab] = useState('background')
 
-  const download_image = async () => {
-    await html2canvas(document.getElementById('to_save'), {
-      allowTaint: true,
-      useCORS: true,
-    }).then((canvas) => {
-      let a = document.createElement('a')
-      a.href = canvas.toDataURL('image/png')
-      a.download = 'capture.png'
-      a.click()
-    })
-  }
-
   const axiosCall = async (part) => {
     let data = ''
     await axios
@@ -57,17 +45,49 @@ const Avatar = () => {
     single(res[0].url)
   }
 
+  const download_image = async () => {
+    await html2canvas(document.getElementById('to_save'), {
+      allowTaint: true,
+      useCORS: true,
+    }).then((canvas) => {
+      let a = document.createElement('a')
+      a.href = canvas.toDataURL('image/png')
+      a.download = 'capture.png'
+      a.click()
+    })
+  }
+
   useEffect(() => {
-    axiosCall('background').then(res => handleRequest(res, setAllBackground, setBackground)).catch(err => console.log('err: ', err))
-    axiosCall('head').then(res => handleRequest(res, setAllHead, setHead)).catch(err => console.log('err: ', err))
-    axiosCall('body').then(res => handleRequest(res, setAllBody, setBody)).catch(err => console.log('err: ', err))
-    axiosCall('ears').then(res => handleRequest(res, setAllEars, setEars)).catch(err => console.log('err: ', err))
-    axiosCall('eyes').then(res => handleRequest(res, setAllEyes, setEyes)).catch(err => console.log('err: ', err))
-    axiosCall('mouth').then(res => handleRequest(res, setAllMouth, setMouth)).catch(err => console.log('err: ', err))
-    axiosCall('nose').then(res => handleRequest(res, setAllNose, setNose)).catch(err => console.log('err: ', err))
-    axiosCall('hand').then(res => handleRequest(res, setAllHand, setHand)).catch(err => console.log('err: ', err))
-    axiosCall('arm').then(res => handleRequest(res, setAllArm, setArm)).catch(err => console.log('err: ', err))
-    axiosCall('extras').then(res => handleRequest(res, setAllExtras, setExtras)).catch(err => console.log('err: ', err))
+    axiosCall('background')
+      .then((res) => handleRequest(res, setAllBackground, setBackground))
+      .catch((err) => console.log('err: ', err))
+    axiosCall('head')
+      .then((res) => handleRequest(res, setAllHead, setHead))
+      .catch((err) => console.log('err: ', err))
+    axiosCall('body')
+      .then((res) => handleRequest(res, setAllBody, setBody))
+      .catch((err) => console.log('err: ', err))
+    axiosCall('ears')
+      .then((res) => handleRequest(res, setAllEars, setEars))
+      .catch((err) => console.log('err: ', err))
+    axiosCall('eyes')
+      .then((res) => handleRequest(res, setAllEyes, setEyes))
+      .catch((err) => console.log('err: ', err))
+    axiosCall('mouth')
+      .then((res) => handleRequest(res, setAllMouth, setMouth))
+      .catch((err) => console.log('err: ', err))
+    axiosCall('nose')
+      .then((res) => handleRequest(res, setAllNose, setNose))
+      .catch((err) => console.log('err: ', err))
+    axiosCall('hand')
+      .then((res) => handleRequest(res, setAllHand, setHand))
+      .catch((err) => console.log('err: ', err))
+    axiosCall('arm')
+      .then((res) => handleRequest(res, setAllArm, setArm))
+      .catch((err) => console.log('err: ', err))
+    axiosCall('extras')
+      .then((res) => handleRequest(res, setAllExtras, setExtras))
+      .catch((err) => console.log('err: ', err))
   }, [])
 
   return (
@@ -105,16 +125,34 @@ const Avatar = () => {
           <button onClick={() => setTab('arm')}>Arm</button>
           <button onClick={() => setTab('extras')}>Extras</button>
         </div>
-        {tab === 'background' && (<AvatarComponents all={allBackground} setValue={setBackground} />)}
-        {tab === 'head' && (<AvatarComponents all={allHead} setValue={setHead} />)}
-        {tab === 'body' && (<AvatarComponents all={allBody} setValue={setBody} />)}
-        {tab === 'ears' && (<AvatarComponents all={allEars} setValue={setEars} />)}
-        {tab === 'eyes' && (<AvatarComponents all={allEyes} setValue={setEyes} />)}
-        {tab === 'mouth' && (<AvatarComponents all={allMouth} setValue={setMouth} />)}
-        {tab === 'nose' && (<AvatarComponents all={allNose} setValue={setNose} />)}
-        {tab === 'hand' && (<AvatarComponents all={allHand} setValue={setHand} />)}
-        {tab === 'arm' && (<AvatarComponents all={allArm} setValue={setArm} />)}
-        {tab === 'extras' && (<AvatarComponents all={allExtras} setValue={setExtras} />)}
+        {tab === 'background' && (
+          <AvatarComponents all={allBackground} setValue={setBackground} />
+        )}
+        {tab === 'head' && (
+          <AvatarComponents all={allHead} setValue={setHead} />
+        )}
+        {tab === 'body' && (
+          <AvatarComponents all={allBody} setValue={setBody} />
+        )}
+        {tab === 'ears' && (
+          <AvatarComponents all={allEars} setValue={setEars} />
+        )}
+        {tab === 'eyes' && (
+          <AvatarComponents all={allEyes} setValue={setEyes} />
+        )}
+        {tab === 'mouth' && (
+          <AvatarComponents all={allMouth} setValue={setMouth} />
+        )}
+        {tab === 'nose' && (
+          <AvatarComponents all={allNose} setValue={setNose} />
+        )}
+        {tab === 'hand' && (
+          <AvatarComponents all={allHand} setValue={setHand} />
+        )}
+        {tab === 'arm' && <AvatarComponents all={allArm} setValue={setArm} />}
+        {tab === 'extras' && (
+          <AvatarComponents all={allExtras} setValue={setExtras} />
+        )}
       </div>
     </div>
   )
